@@ -1,54 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hot Restaurant Reservation</title>
-    <!-- Latest compiled and minified CSS & JS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Hot Restaurant</h1>
-        <h3>Make your reservation</h3>
-        <hr />
-        <a href="/">
-          <button class="btn btn-danger btn-lg">
-            <span class="fa fa-eye"></span> Make Reservation
-          </button>
-        </a>
-        <a href="/">
-            <button class="btn btn-danger btn-lg">
-              <span class="fa fa-eye"></span> Home
-            </button>
-          </a>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3><strong>Current Reservation</strong></h3>
-            </div>
-            <div class="card-body">
-                spot for reservations
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hot Restaurant Reservation</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hot Restaurant</h1>
+      <h3>Make your reservation</h3>
+      <hr />
+      <a href="/">
+        <button class="btn btn-danger btn-lg">
+          <span class="fa fa-eye"></span> Make Reservation
+        </button>
+      </a>
+      <a href="/">
+        <button class="btn btn-danger btn-lg">
+          <span class="fa fa-eye"></span> Home
+        </button>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3><strong>Current Reservation</strong></h3>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3><strong>Wait List</strong></h3>
-            </div>
-            <div class="card-body">
-                spot for waitlist
-            </div>
+          <div id="reserve-list" class="card-body">
+            <!--spot for reservations-->
+
           </div>
         </div>
       </div>
     </div>
-  </body>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3><strong>Wait List</strong></h3>
+          </div>
+          <div id="waitlist-list" class="card-body">
+            <!--spot for waitlist-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- GET Requests here -->
+  <script type="text/javascript">
+
+    const reserveList = document.getElementById('reserve-list');
+    const waitlistList = document.getElementById('waitlist-list');
+
+    fetch(`/api/reservations/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const { name, phone, email, id } = data;
+
+        if (data) {
+          for (let i=0; i<data.length; i++) {
+            const customer = data[i].id;
+            const reserveItem = document.createElement("p");
+            reserveItem.textContent = customer;
+            reserveList.appendChild(reserveItem)
+          }
+          
+        } else {
+          reserveList.textContent =
+            'The force is not strong with this one. Your character was not found.';
+          statsEl.setAttribute('style', 'display: none');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  </script>
+</body>
+
 </html>
