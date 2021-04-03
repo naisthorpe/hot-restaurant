@@ -8,6 +8,12 @@ const PORT = 3000;
 
 // Variables
 const reservations = [
+  {
+    name: "Nick",
+    phone: "555-555-5555",
+    email: "aisthorpe@gmail.com",
+    id: "nickais"
+  }
   
 ];
 
@@ -29,3 +35,5 @@ app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.htm
 
 // Starts the server to begin listening
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
+
+

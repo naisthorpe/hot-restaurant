@@ -71,8 +71,7 @@
     <script type="text/javascript">
       
       const addBtn = document.getElementById('add-btn');
-      
-      // Question: What is "e" short for?
+
       // event
       addBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -91,23 +90,24 @@
         };
 
         // fetch the route and post a json object
-        /*
-        fetch('/api/characters', {
+        
+        fetch('/api/reservations', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newCharacter),
+          body: JSON.stringify(newReservation),
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('add.html', data);
-            alert(`Adding character: ${data.name}`);
+            console.log('reserve.html', data);
+            if (let i=0; i<5; i++) {}
+            alert(`Creating reservation for: ${data.name}`);
           })
           .catch((error) => {
             console.error('Error:', error);
           });
-          */
+          
       });
     </script>
   </body>
