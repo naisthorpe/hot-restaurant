@@ -1,16 +1,19 @@
-const http = require('http');
+// Dependencies
+const express = require('express');
+const path = require('path');
 
+// Sets up the Express App
+const app = express();
 const PORT = 3000;
 
-const handleRequest = (request, response) => {
-    // Send the below string to the client when the user visits the PORT URL
-    response.end(`Hot Restaurant: ${request.url}`);
-  };
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const server = http.createServer(handleRequest);
+// Routes
 
-  server.listen(PORT, () => {
-    // Log (server-side) when our server has started
-    console.log(`Server listening on: http://localhost:${PORT}`);
-  });
-  
+// Basic route that sends the user first to the AJAX Page
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'view.html')));
+
+// Starts the server to begin listening
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
