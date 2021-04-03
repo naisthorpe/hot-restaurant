@@ -39,18 +39,18 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="role">Phone Number</label>
-                  <input type="text" class="form-control" id="role" />
+                  <label for="phone">Phone Number</label>
+                  <input type="text" class="form-control" id="phone" />
                 </div>
 
                 <div class="form-group">
-                  <label for="age">Email</label>
-                  <input type="text" class="form-control" id="age" />
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="email" />
                 </div>
 
                 <div class="form-group">
-                  <label for="force-points">Unique ID</label>
-                  <input type="text" class="form-control" id="force-points" />
+                  <label for="id">Unique ID</label>
+                  <input type="text" class="form-control" id="id" />
                 </div>
               </form>
               <br />
@@ -68,5 +68,47 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      
+      const addBtn = document.getElementById('add-btn');
+      
+      // Question: What is "e" short for?
+      // event
+      addBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // This sets the input values as variables and trims any spaces
+        let resName = document.getElementById('name').value.trim();
+        let resPhone = document.getElementById('phone').value.trim();
+        let resEmail = document.getElementById('email').value.trim();
+        let resId = document.getElementById('id').value.trim();
+        
+        let newReservation = {
+          name: resName,
+          phone: resPhone,
+          email: resEmail,
+          id: resId,
+        };
+
+        // fetch the route and post a json object
+        /*
+        fetch('/api/characters', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newCharacter),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('add.html', data);
+            alert(`Adding character: ${data.name}`);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+          */
+      });
+    </script>
   </body>
 </html>
